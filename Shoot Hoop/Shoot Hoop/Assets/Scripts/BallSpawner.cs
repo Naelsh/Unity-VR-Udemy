@@ -13,9 +13,31 @@ public class BallSpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.Space))
+        
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            Instantiate(basketBallPrefab);
+            InstantiateBall(Vector3.forward);
         }
-	}
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            InstantiateBall(Vector3.back);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            InstantiateBall(Vector3.left);
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            InstantiateBall(Vector3.right);
+        }
+    }
+
+    void InstantiateBall(Vector3 direction)
+    {
+        float increasedVelocity = 5f;
+        direction *= increasedVelocity;
+        GameObject basketball = Instantiate(basketBallPrefab);
+        Rigidbody basketBallRB = basketball.GetComponent<Rigidbody>();
+        basketBallRB.velocity = direction;
+    }
 }
