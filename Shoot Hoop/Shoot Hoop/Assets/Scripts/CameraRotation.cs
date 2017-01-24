@@ -6,11 +6,15 @@ public class CameraRotation : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        transform.rotation = Quaternion.Euler(0,90,0);
+        
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        transform.rotation *= Quaternion.Euler(0, 10f* Time.deltaTime, 0);
+        float rotationSpeed = 30f;
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+        
+        transform.rotation *= Quaternion.Euler(-(mouseY * Time.deltaTime * rotationSpeed), mouseX * Time.deltaTime * rotationSpeed, 0);
 	}
 }
