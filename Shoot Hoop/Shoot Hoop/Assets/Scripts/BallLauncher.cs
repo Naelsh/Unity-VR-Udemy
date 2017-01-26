@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BallLauncher : MonoBehaviour {
 
-    public float ballVelocity = 5f;
-    public GameObject basketBallPrefab;
+    public float ballSpeed = 20f;
+    public GameObject ballPrefab;
 
 	// Use this for initialization
 	void Start () {
@@ -16,16 +16,11 @@ public class BallLauncher : MonoBehaviour {
 	void Update () {
         if (Input.GetButtonDown("Fire1"))
         {
-            InstantiateBall(Vector3.forward);
+            GameObject instance = Instantiate(ballPrefab);
+            instance.transform.position = transform.position;
+            Rigidbody rb = instance.GetComponent<Rigidbody>();
+            Camera camera = GetComponentInChildren<Camera>();
+            rb.velocity = camera.transform.rotation * Vector3.forward * ballSpeed;
         }
-    }
-
-    public void InstantiateBall(Vector3 direction)
-    {
-        GameObject basketball = Instantiate(basketBallPrefab);
-        basketball.transform.position = transform.position;
-        Rigidbody basketBallRB = basketball.GetComponent<Rigidbody>();
-        Camera camera = GetComponentInChildren<Camera>();
-        basketBallRB.velocity = camera.transform.rotation * direction * ballVelocity;
     }
 }
