@@ -25,6 +25,7 @@ public class BallLauncher : MonoBehaviour {
         GameObject basketball = Instantiate(basketBallPrefab);
         basketball.transform.position = transform.position;
         Rigidbody basketBallRB = basketball.GetComponent<Rigidbody>();
-        basketBallRB.velocity = direction * ballVelocity;
+        Camera camera = GetComponentInChildren<Camera>();
+        basketBallRB.velocity = camera.transform.rotation * direction * ballVelocity;
     }
 }
