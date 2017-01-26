@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreKeeper : MonoBehaviour {
+public class Target : MonoBehaviour {
 
-    private int points = 0;
+    public int pointPerHit = 1;
 
 	// Use this for initialization
 	void Start () {
-		
+        
 	}
 	
 	// Update is called once per frame
@@ -18,7 +18,7 @@ public class ScoreKeeper : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        points++;
-        print("Current points: " + points);
+        ScoreKeeper scoreKeeper = FindObjectOfType<ScoreKeeper>();
+        scoreKeeper.IncrementScore(pointPerHit);
     }
 }
